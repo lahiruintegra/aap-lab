@@ -2,6 +2,8 @@
 - name: Basic System Setup - Ubuntu
   hosts: web
   become: true
+  vars:
+    user_name: 'ansible'
   tasks:
     - name: Update package cache
       ansible.builtin.apt:
@@ -11,9 +13,9 @@
     - name: Upgrade all packages
       ansible.builtin.apt:
         upgrade: dist
-        
+
     - name: Create a new user
       ansible.builtin.user:
-        name: Lahiru
+        name: "{{ user_name }}"
         state: present
         create_home: true
